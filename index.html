@@ -1,10 +1,1060 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>扫码进入</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第十章 · 建设社会主义文化强国｜星河答题站</title>
+  <style>
+    :root{
+      --bg:#0a1022;
+      --bg2:#131a36;
+      --panel:rgba(255,255,255,.08);
+      --panel2:rgba(255,255,255,.12);
+      --text:#eef3ff;
+      --muted:#b9c4e6;
+      --primary:#8b5cf6;
+      --cyan:#22d3ee;
+      --pink:#fb7185;
+      --gold:#ffd166;
+      --green:#22c55e;
+      --red:#ef4444;
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(34,211,238,.18), transparent 24%),
+        radial-gradient(circle at 85% 20%, rgba(251,113,133,.14), transparent 24%),
+        radial-gradient(circle at 70% 80%, rgba(139,92,246,.16), transparent 25%),
+        linear-gradient(135deg,var(--bg),var(--bg2));
+      overflow-x:hidden;
+    }
+    .stars{
+      position:fixed; inset:0; pointer-events:none; opacity:.65;
+      background-image:
+        radial-gradient(2px 2px at 15% 20%, rgba(255,255,255,.75), transparent 60%),
+        radial-gradient(2px 2px at 30% 60%, rgba(255,255,255,.5), transparent 60%),
+        radial-gradient(2px 2px at 80% 15%, rgba(255,255,255,.7), transparent 60%),
+        radial-gradient(2px 2px at 75% 75%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(2px 2px at 50% 88%, rgba(255,255,255,.5), transparent 60%);
+      animation:twinkle 6s linear infinite;
+    }
+    @keyframes twinkle{50%{opacity:1}}
+    .orb,.orb::before,.orb::after{
+      position:fixed;border-radius:50%;pointer-events:none;filter:blur(18px)
+    }
+    .orb{
+      width:280px;height:280px;left:-60px;top:40px;background:rgba(34,211,238,.08);
+      animation:f1 14s ease-in-out infinite;
+    }
+    .orb::before{
+      content:"";position:absolute;width:180px;height:180px;left:240px;top:220px;background:rgba(139,92,246,.10);
+      animation:f2 12s ease-in-out infinite;
+    }
+    .orb::after{
+      content:"";position:absolute;width:160px;height:160px;left:calc(100vw - 260px);top:520px;background:rgba(251,113,133,.08);
+      animation:f3 16s ease-in-out infinite;
+    }
+    @keyframes f1{50%{transform:translate(30px,50px) scale(1.05)}}
+    @keyframes f2{50%{transform:translate(-25px,-35px) scale(.95)}}
+    @keyframes f3{50%{transform:translate(25px,-30px) scale(1.08)}}
+
+    .wrap{max-width:1280px;margin:0 auto;padding:22px 16px 50px;position:relative;z-index:1}
+    .glass{
+      background:var(--panel);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius);
+    }
+    .hero{
+      display:grid;
+      grid-template-columns:1.25fr .95fr;
+      gap:18px;
+      padding:22px;
+    }
+    .hero-left,.hero-right{padding:20px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 16px;border-radius:999px;
+      background:rgba(255,255,255,.09);
+      font-size:14px;
+    }
+    h1{
+      margin:18px 0 10px;
+      font-size:clamp(34px,4vw,58px);
+      line-height:1.08;
+    }
+    .shine{
+      background:linear-gradient(90deg,#fff,#b4f3ff,#ffd6ea,#fff);
+      background-size:200% auto;
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      animation:shine 6s linear infinite;
+    }
+    @keyframes shine{to{background-position:200% center}}
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.8;
+    }
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+    .chip{
+      padding:10px 14px;border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
+      font-size:14px;
+    }
+    .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+    button{
+      border:none;cursor:pointer;color:white;font:inherit;font-weight:700;
+      padding:14px 18px;border-radius:16px;transition:.22s transform,.22s opacity;
+      box-shadow:0 10px 24px rgba(0,0,0,.18);
+    }
+    button:hover{transform:translateY(-2px)}
+    .btn-primary{background:linear-gradient(135deg,var(--primary),#6d28d9)}
+    .btn-cyan{background:linear-gradient(135deg,var(--cyan),#0284c7)}
+    .btn-ghost{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      height:100%;
+    }
+    .stat{
+      padding:18px;
+      border-radius:20px;
+      background:rgba(255,255,255,.08);
+      position:relative;
+      overflow:hidden;
+    }
+    .stat::after{
+      content:"";
+      position:absolute;right:-35px;bottom:-35px;
+      width:120px;height:120px;border-radius:50%;
+      background:rgba(255,255,255,.05);
+    }
+    .stat .num{font-size:30px;font-weight:800;margin:8px 0 6px}
+    .stat .lab{font-size:14px;color:var(--muted)}
+
+    .main{
+      display:grid;
+      grid-template-columns:330px 1fr;
+      gap:18px;
+      margin-top:18px;
+    }
+    .side{padding:18px;position:sticky;top:16px;height:fit-content}
+    .section-title{
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:1.6px;
+      color:#cad4f5;
+      margin-bottom:12px;
+    }
+    .ring{
+      width:160px;height:160px;margin:6px auto 16px;
+      border-radius:50%;
+      display:grid;place-items:center;
+      background:conic-gradient(var(--cyan) 0deg, var(--primary) 0deg, rgba(255,255,255,.08) 0deg);
+      position:relative;
+      box-shadow:inset 0 0 36px rgba(255,255,255,.05), 0 10px 30px rgba(0,0,0,.22);
+    }
+    .ring::before{
+      content:"";
+      position:absolute;inset:14px;border-radius:50%;
+      background:linear-gradient(145deg,rgba(10,16,34,.96),rgba(19,26,54,.96));
+    }
+    .ring .inner{position:relative;text-align:center}
+    .ring strong{display:block;font-size:34px}
+    .ring span{font-size:13px;color:var(--muted)}
+    .mini-grid{
+      display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0 16px;
+    }
+    .mini{
+      text-align:center;padding:12px;border-radius:16px;background:rgba(255,255,255,.06)
+    }
+    .mini b{display:block;font-size:20px;margin-bottom:4px}
+    .progress-list{display:grid;gap:10px}
+    .prog{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.06);color:var(--muted)
+    }
+    .tip{
+      margin-top:16px;padding:14px;border-radius:18px;background:rgba(255,255,255,.06);
+      color:var(--muted);font-size:14px;line-height:1.7;
+    }
+
+    .content{display:grid;gap:18px}
+    .toolbar{
+      padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap
+    }
+    .toolbar .left,.toolbar .right{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .tag{
+      padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);font-size:13px;color:#dfe6ff
+    }
+
+    .card{padding:24px;position:relative;overflow:hidden}
+    .card::before{
+      content:"";position:absolute;top:-110px;right:-110px;width:240px;height:240px;border-radius:50%;
+      background:radial-gradient(circle, rgba(34,211,238,.18), transparent 60%);
+    }
+    .q-top{
+      display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:18px
+    }
+    .q-type{
+      padding:10px 14px;border-radius:999px;
+      background:linear-gradient(135deg,rgba(139,92,246,.24),rgba(34,211,238,.18));
+      font-weight:700;
+    }
+    .q-meta{display:flex;gap:10px;flex-wrap:wrap}
+    .q-title{
+      margin:0 0 18px;
+      font-size:28px;
+      line-height:1.45;
+      position:relative;
+      z-index:1;
+    }
+    .q-desc{
+      color:var(--muted);
+      line-height:1.8;
+      margin:-6px 0 18px;
+    }
+
+    .options{display:grid;gap:14px}
+    .option{
+      position:relative;padding:18px 18px 18px 58px;border-radius:18px;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+      transition:.22s transform,.22s border-color,.22s background,.22s box-shadow;
+      user-select:none;
+    }
+    .option:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.16)}
+    .option.checked{
+      background:rgba(139,92,246,.14);
+      border-color:rgba(139,92,246,.5);
+      box-shadow:0 8px 22px rgba(139,92,246,.16);
+    }
+    .option.correct{
+      background:rgba(34,197,94,.14);
+      border-color:rgba(34,197,94,.55);
+    }
+    .option.wrong{
+      background:rgba(239,68,68,.13);
+      border-color:rgba(239,68,68,.55);
+    }
+    .option .mark{
+      position:absolute;left:18px;top:50%;transform:translateY(-50%);
+      width:28px;height:28px;border-radius:50%;
+      border:2px solid rgba(255,255,255,.3);
+      display:grid;place-items:center;font-weight:800;
+      background:rgba(255,255,255,.03)
+    }
+
+    .essay-box{display:grid;gap:14px}
+    textarea{
+      width:100%;min-height:150px;resize:vertical;
+      border:none;outline:none;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:var(--text);font:inherit;line-height:1.8;
+      border-radius:20px;padding:18px;
+    }
+    .ref{
+      display:none;
+      padding:16px 18px;border-radius:18px;
+      background:rgba(34,211,238,.08);
+      border:1px solid rgba(34,211,238,.18);
+      color:#daf8ff;
+      line-height:1.8;
+    }
+    .ref.show{display:block}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+
+    .map-card{padding:22px}
+    .map{
+      display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px
+    }
+    .node{
+      padding:18px;border-radius:20px;
+      background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.08)
+    }
+    .node h4{margin:0 0 10px;font-size:18px}
+    .node p{margin:0;color:var(--muted);line-height:1.75;font-size:14px}
+
+    .result{
+      display:none;
+      padding:24px;
+    }
+    .result.show{display:block;animation:fadeUp .35s ease}
+    .result-grid{
+      display:grid;grid-template-columns:1.1fr .9fr;gap:18px
+    }
+    .score-big{
+      padding:22px;border-radius:22px;
+      background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(34,211,238,.12));
+      border:1px solid rgba(255,255,255,.10)
+    }
+    .score-big h2{margin:0 0 8px;font-size:44px}
+    .score-big p{margin:0;color:var(--muted);line-height:1.8}
+    .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .badge{
+      padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.09)
+    }
+    .review{display:grid;gap:10px}
+    .review-item{
+      padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.06)
+    }
+    .review-item strong{display:block;margin-bottom:4px}
+    .muted{color:var(--muted)}
+    .hidden{display:none !important}
+
+    .toast{
+      position:fixed;right:20px;bottom:20px;z-index:100;
+      padding:14px 18px;border-radius:16px;
+      background:rgba(14,22,44,.95);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      opacity:0;transform:translateY(16px);pointer-events:none;
+      transition:.28s;
+    }
+    .toast.show{opacity:1;transform:translateY(0)}
+
+    .confetti{
+      position:fixed;top:-20px;width:12px;height:18px;pointer-events:none;z-index:99;
+      animation:fall linear forwards;
+    }
+    @keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:0}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+    @media (max-width:980px){
+      .hero,.main,.result-grid,.map{grid-template-columns:1fr}
+      .side{position:static}
+      .q-title{font-size:24px}
+    }
+    @media (max-width:640px){
+      .hero-left,.hero-right,.card,.toolbar,.side,.map-card,.result{padding:18px}
+      h1{font-size:36px}
+      .ring{width:140px;height:140px}
+      .q-title{font-size:22px}
+    }
+  </style>
 </head>
 <body>
-  <h1>可爱小糖糖</h1>
+  <div class="stars"></div>
+  <div class="orb"></div>
+  <div class="toast" id="toast"></div>
+
+  <div class="wrap">
+    <section class="hero glass">
+      <div class="hero-left">
+        <div class="pill">✨ 第十章专题 · 建设社会主义文化强国</div>
+        <h1><span class="shine">文化星海闯关站</span></h1>
+        <p>
+          一个把“思政答题”做得更像互动游戏的小网站。支持顺序闯关、随机抽题、
+          连击加分、主观题参考要点、通关称号、历史最好成绩记录，还附带一张第十章知识地图。
+        </p>
+        <div class="chips">
+          <span class="chip">文化自信</span>
+          <span class="chip">意识形态</span>
+          <span class="chip">核心价值观</span>
+          <span class="chip">传统文化创新发展</span>
+          <span class="chip">文化事业与文化产业</span>
+          <span class="chip">国际传播</span>
+        </div>
+        <div class="btns">
+          <button class="btn-primary" id="startBtn">开始闯关</button>
+          <button class="btn-cyan" id="randomBtn">随机抽题模式</button>
+          <button class="btn-ghost" id="scrollMapBtn">先看知识地图</button>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="stats">
+          <div class="stat">
+            <div class="lab">题库数量</div>
+            <div class="num" id="heroCount">20</div>
+            <div class="lab">含选择 / 判断 / 思考题</div>
+          </div>
+          <div class="stat">
+            <div class="lab">当前模式</div>
+            <div class="num" id="heroMode">待启动</div>
+            <div class="lab">可顺序可随机</div>
+          </div>
+          <div class="stat">
+            <div class="lab">历史最好</div>
+            <div class="num" id="heroBest">暂无</div>
+            <div class="lab">浏览器本地自动保存</div>
+          </div>
+          <div class="stat">
+            <div class="lab">互动体验</div>
+            <div class="num">炫彩</div>
+            <div class="lab">连击 / 动效 / 通关称号</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="main">
+      <aside class="side glass">
+        <div class="section-title">实时面板</div>
+        <div class="ring" id="ring">
+          <div class="inner">
+            <strong id="ringNum">0%</strong>
+            <span>完成进度</span>
+          </div>
+        </div>
+
+        <div class="mini-grid">
+          <div class="mini"><b id="scoreNum">0</b><span>分数</span></div>
+          <div class="mini"><b id="comboNum">0</b><span>连击</span></div>
+          <div class="mini"><b id="rightNum">0</b><span>命中</span></div>
+          <div class="mini"><b id="timeNum">00:00</b><span>用时</span></div>
+        </div>
+
+        <div class="progress-list">
+          <div class="prog"><span>当前模式</span><strong id="modeText">待启动</strong></div>
+          <div class="prog"><span>当前题号</span><strong id="indexText">0 / 0</strong></div>
+          <div class="prog"><span>历史最好</span><strong id="bestText">--</strong></div>
+        </div>
+
+        <div class="tip">
+          <strong>玩法提示</strong><br>
+          ① 选择题 / 判断题可即时判分。<br>
+          ② 主观题支持展开参考要点。<br>
+          ③ 连续答对会获得额外加分。<br>
+          ④ 支持方向键切题，1/2/3/4 快速选项。<br>
+          ⑤ 重新开始会重新洗牌。
+        </div>
+      </aside>
+
+      <main class="content">
+        <section class="toolbar glass">
+          <div class="left">
+            <span class="tag">玻璃拟态</span>
+            <span class="tag">第十章</span>
+            <span class="tag" id="phaseTag">等待开始</span>
+          </div>
+          <div class="right">
+            <button class="btn-ghost" id="prevBtn">上一题</button>
+            <button class="btn-ghost" id="nextBtn">下一题</button>
+            <button class="btn-cyan" id="shuffleBtn">重新洗牌</button>
+          </div>
+        </section>
+
+        <section class="card glass" id="questionCard">
+          <div class="q-top">
+            <div class="q-type" id="qType">未开始</div>
+            <div class="q-meta">
+              <span class="tag" id="qTheme">主题</span>
+              <span class="tag" id="qLevel">难度</span>
+            </div>
+          </div>
+
+          <h2 class="q-title" id="qTitle">点击“开始闯关”，进入第十章答题模式。</h2>
+          <div class="q-desc" id="qDesc">
+            本站题目围绕文化自信、意识形态、核心价值观、传统文化创造性转化与创新性发展、文化事业和文化产业等内容设计。
+          </div>
+
+          <div class="options hidden" id="optionsBox"></div>
+
+          <div class="essay-box hidden" id="essayBox">
+            <textarea id="essayInput" placeholder="在这里写下你的思路、关键词或简答提纲……"></textarea>
+            <div class="ref" id="refBox"></div>
+          </div>
+
+          <div class="actions">
+            <button class="btn-primary" id="submitBtn">提交答案</button>
+            <button class="btn-cyan hidden" id="refBtn">展开参考要点</button>
+            <button class="btn-ghost" id="restartBtn">重新开始</button>
+          </div>
+        </section>
+
+        <section class="map-card glass" id="mapCard">
+          <div class="section-title">知识地图</div>
+          <div class="map">
+            <div class="node">
+              <h4>文化自信</h4>
+              <p>文化自信是更基础、更广泛、更深厚的自信，是一个国家、一个民族发展中最基本、最深沉、最持久的力量。</p>
+            </div>
+            <div class="node">
+              <h4>意识形态工作</h4>
+              <p>要坚持马克思主义在意识形态领域指导地位的根本制度，建设具有强大凝聚力和引领力的社会主义意识形态。</p>
+            </div>
+            <div class="node">
+              <h4>核心价值观</h4>
+              <p>培育和践行社会主义核心价值观，是凝魂聚气、强基固本的基础工程，要融入社会生活各方面。</p>
+            </div>
+            <div class="node">
+              <h4>传统文化创新发展</h4>
+              <p>坚持古为今用、推陈出新，推动中华优秀传统文化创造性转化、创新性发展，激活其当代价值与世界意义。</p>
+            </div>
+            <div class="node">
+              <h4>文化事业与文化产业</h4>
+              <p>要坚持以人民为中心，提高公共文化服务水平，繁荣发展文化事业和文化产业，满足人民精神文化需求。</p>
+            </div>
+            <div class="node">
+              <h4>国际传播与国家形象</h4>
+              <p>要讲好中国故事、传播好中国声音，展现真实、立体、全面的中国，提升国家文化软实力和中华文化影响力。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="result glass" id="resultBox">
+          <div class="result-grid">
+            <div class="score-big">
+              <div class="section-title">通关结算</div>
+              <h2 id="finalScore">0 分</h2>
+              <p id="finalDesc">准备好后开始挑战。</p>
+              <div class="badges" id="badgeBox"></div>
+              <div class="actions" style="margin-top:18px">
+                <button class="btn-primary" id="againBtn">再来一局</button>
+                <button class="btn-cyan" id="reviewBtn">回到首题复盘</button>
+              </div>
+            </div>
+            <div class="review" id="reviewList"></div>
+          </div>
+        </section>
+      </main>
+    </section>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        type:"single",
+        theme:"章节主题",
+        level:"入门",
+        title:"第十章的核心主题是下列哪一项？",
+        desc:"请根据章节标题作答。",
+        options:["全面依法治国","建设社会主义文化强国","推动高质量发展","坚持党的全面领导"],
+        answer:[1],
+        explain:"第十章的标题就是“建设社会主义文化强国”。"
+      },
+      {
+        type:"single",
+        theme:"文化自信",
+        level:"基础",
+        title:"教材强调，文化自信是一个国家、一个民族发展中怎样的自信？",
+        desc:"请选择最完整的一项。",
+        options:["最外显、最热闹的自信","更基础、更广泛、更深厚的自信","最短期、最直接的自信","更经济、更技术的自信"],
+        answer:[1],
+        explain:"教材明确指出：文化自信是更基础、更广泛、更深厚的自信。"
+      },
+      {
+        type:"judge",
+        theme:"文化强国",
+        level:"基础",
+        title:"判断：推动文化繁荣兴盛，能够为推进中国式现代化建设提供思想保证、舆论支持、精神动力和文化条件。",
+        desc:"请选择“正确”或“错误”。",
+        options:["正确","错误"],
+        answer:[0],
+        explain:"这是教材论述建设社会主义文化强国重要意义时的关键表述。"
+      },
+      {
+        type:"single",
+        theme:"意识形态",
+        level:"进阶",
+        title:"下列哪一项最符合教材对意识形态工作的定位？",
+        desc:"从教材表述中选出最准确的说法。",
+        options:["只是文艺管理问题","是为国家立心、为民族立魂的工作","只是网络平台技术工作","只属于宣传部门事务"],
+        answer:[1],
+        explain:"教材强调意识形态工作是为国家立心、为民族立魂的工作。"
+      },
+      {
+        type:"single",
+        theme:"意识形态制度",
+        level:"进阶",
+        title:"建设具有强大凝聚力和引领力的社会主义意识形态，前提是坚持什么？",
+        desc:"从制度层面作答。",
+        options:["资本逻辑主导地位","西方文化标准","马克思主义在意识形态领域指导地位的根本制度","流量传播机制优先"],
+        answer:[2],
+        explain:"教材学习要点明确强调这一根本制度。"
+      },
+      {
+        type:"single",
+        theme:"新闻舆论工作",
+        level:"中等",
+        title:"教材概括新时代新闻舆论工作的职责使命时，不包含下列哪项？",
+        desc:"排除不符合教材精神的选项。",
+        options:["高举旗帜、引领导向","团结人民、鼓舞士气","澄清谬误、明辨是非","追逐流量、娱乐至上"],
+        answer:[3],
+        explain:"“追逐流量、娱乐至上”显然不符合教材对主流舆论工作的要求。"
+      },
+      {
+        type:"single",
+        theme:"文化建设任务",
+        level:"中等",
+        title:"教材提出“聚民心、育新人、兴文化、展形象”，其中“育新人”重点指向什么？",
+        desc:"结合原文理解。",
+        options:["培养流量博主","培养和践行社会主义核心价值观，提高人民思想觉悟、道德水准、文明素养","单纯扩大文化市场规模","增加艺术院校人数"],
+        answer:[1],
+        explain:"“育新人”重在立德树人、以文化人，核心是价值塑造。"
+      },
+      {
+        type:"judge",
+        theme:"文化发展方针",
+        level:"中等",
+        title:"判断：坚持“二为”方向和“双百”方针，是繁荣发展社会主义文化的重要方针。",
+        desc:"注意“二为”和“双百”的对应关系。",
+        options:["正确","错误"],
+        answer:[0],
+        explain:"教材明确提出：坚持为人民服务、为社会主义服务的方向，贯彻百花齐放、百家争鸣的方针。"
+      },
+      {
+        type:"single",
+        theme:"核心价值观",
+        level:"基础",
+        title:"教材认为，培育和践行社会主义核心价值观属于哪类工程？",
+        desc:"请选择最准确表述。",
+        options:["产业扩张工程","凝魂聚气、强基固本的基础工程","文化包装工程","国际传播工程"],
+        answer:[1],
+        explain:"这是教材对社会主义核心价值观建设地位的经典概括。"
+      },
+      {
+        type:"single",
+        theme:"传统文化",
+        level:"中等",
+        title:"推动中华优秀传统文化创造性转化、创新性发展的关键做法，最符合教材的是哪项？",
+        desc:"注意“古为今用、推陈出新”的内涵。",
+        options:["原封不动照搬古代形态","只保留形式，不谈现实意义","激活其当代价值和世界意义，服务现实发展","完全抛弃传统，重新开始"],
+        answer:[2],
+        explain:"教材强调在继承中发展、在守正中创新。"
+      },
+      {
+        type:"judge",
+        theme:"文化遗产",
+        level:"基础",
+        title:"判断：保护文物和文化遗产只是文博系统的事情，与文化自信和历史文脉关系不大。",
+        desc:"根据教材精神判断。",
+        options:["正确","错误"],
+        answer:[1],
+        explain:"教材强调文化遗产关乎文化自信、历史文脉和文明传承。"
+      },
+      {
+        type:"single",
+        theme:"文化事业与文化产业",
+        level:"中等",
+        title:"繁荣发展文化事业和文化产业的根本落点是什么？",
+        desc:"请选择最符合教材的一项。",
+        options:["满足人民精神文化需求，保障人民文化权益","只追求票房点击量","优先满足少数圈层审美","主要面向发达地区消费"],
+        answer:[0],
+        explain:"教材强调坚持以人民为中心。"
+      },
+      {
+        type:"single",
+        theme:"公共文化服务",
+        level:"进阶",
+        title:"提升公共文化服务水平，教材强调的方向不包括下列哪项？",
+        desc:"请选出错误项。",
+        options:["推进城乡公共文化服务体系一体建设","优化城乡文化资源配置","实施国家文化数字化战略","只把资源集中在少数发达地区"],
+        answer:[3],
+        explain:"教材强调的是均衡、普惠和高质量，而不是资源过度集中。"
+      },
+      {
+        type:"single",
+        theme:"国际传播",
+        level:"进阶",
+        title:"“展形象”在教材中的核心要求，更接近下列哪一项？",
+        desc:"从国际传播能力建设角度理解。",
+        options:["讲好中国故事、传播好中国声音，展现真实立体全面的中国","只做对内宣传","把文化建设等同旅游营销","只追求视觉包装"],
+        answer:[0],
+        explain:"教材强调推进国际传播能力建设。"
+      },
+      {
+        type:"single",
+        theme:"本章总结",
+        level:"挑战",
+        title:"下列哪一项最符合本章总结逻辑？",
+        desc:"选择最完整的一项。",
+        options:[
+          "文化建设只要发展产业，不必重视价值引领",
+          "文化建设只需要提升技术平台",
+          "要坚定文化自信，坚持意识形态根本制度，培育核心价值观，推动优秀传统文化创造性转化创新性发展，繁荣文化事业和文化产业",
+          "文化强国只是文艺工作者的任务"
+        ],
+        answer:[2],
+        explain:"这一项最贴近本章小结的整体逻辑。"
+      },
+
+      {
+        type:"essay",
+        theme:"思考题",
+        level:"开放作答",
+        title:"为什么说文化自信是一个国家、一个民族发展中最基本、最深沉、最持久的力量？",
+        desc:"可从精神根基、民族凝聚力、发展动力、文化软实力等角度组织答案。",
+        ref:"参考要点：①文化是国家和民族的灵魂；②文化自信更基础、更广泛、更深厚；③关系凝聚力、向心力和创造力；④为中国式现代化建设提供思想保证、精神动力与文化条件；⑤关系国家文化软实力和中华文化影响力提升。"
+      },
+      {
+        type:"essay",
+        theme:"思考题",
+        level:"开放作答",
+        title:"如何理解意识形态工作是为国家立心、为民族立魂的工作？",
+        desc:"可结合制度保障、正确导向、主流思想舆论、社会凝聚力等方面展开。",
+        ref:"参考要点：①意识形态决定文化前进方向和发展道路；②坚持马克思主义指导地位是根本制度；③正确导向能够凝聚人心、汇聚力量；④错误导向会动摇共同思想基础；⑤建设具有强大凝聚力和引领力的社会主义意识形态。"
+      },
+      {
+        type:"essay",
+        theme:"思考题",
+        level:"开放作答",
+        title:"如何推动中华优秀传统文化创造性转化、创新性发展？",
+        desc:"建议围绕“古为今用、推陈出新、服务现实、融入生活”来写。",
+        ref:"参考要点：①坚持古为今用、推陈出新；②提炼其中的当代价值和世界意义；③推动融入现代生产生活和社会治理；④加强研究阐释、传播普及和文艺转化；⑤在守正创新中不断焕发生机。"
+      },
+      {
+        type:"essay",
+        theme:"思考题",
+        level:"开放作答",
+        title:"为什么要像爱惜自己的生命一样保护好文化遗产？",
+        desc:"可以从历史文脉、民族记忆、文化自信、文明传承等方面组织。",
+        ref:"参考要点：①文化遗产承载历史文脉和民族记忆；②关系文化自信与文明传承；③是不可再生、不可替代的宝贵资源；④保护好才能更好传承与利用；⑤有助于建设中华民族现代文明。"
+      },
+      {
+        type:"essay",
+        theme:"思考题",
+        level:"开放作答",
+        title:"如何理解繁荣发展文化事业和文化产业要坚持以人民为中心？",
+        desc:"建议从人民文化权益、公共文化服务、精神文化需求等角度展开。",
+        ref:"参考要点：①文化建设为了人民、依靠人民、成果由人民共享；②保障人民基本文化权益；③提升公共文化服务水平；④丰富高质量文化供给；⑤满足人民日益增长的精神文化需求。"
+      }
+    ];
+
+    const state = {
+      started:false,
+      order:[],
+      current:0,
+      score:0,
+      combo:0,
+      right:0,
+      answered:{},
+      mode:"待启动",
+      startTime:null,
+      timer:null
+    };
+
+    const $ = s => document.querySelector(s);
+
+    function toast(msg){
+      const t = $("#toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => t.classList.remove("show"), 1800);
+    }
+
+    function shuffle(arr){
+      const a = [...arr];
+      for(let i=a.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [a[i],a[j]] = [a[j],a[i]];
+      }
+      return a;
+    }
+
+    function loadBest(){
+      const best = localStorage.getItem("ch10-best-score");
+      $("#heroBest").textContent = best ? best + "分" : "暂无";
+      $("#bestText").textContent = best ? best + "分" : "--";
+    }
+
+    function updateRing(){
+      const total = state.order.length || questions.length;
+      const done = Object.keys(state.answered).length;
+      const pct = state.started ? Math.round(done / total * 100) : 0;
+      $("#ringNum").textContent = pct + "%";
+      $("#ring").style.background =
+        `conic-gradient(var(--cyan) 0deg, var(--primary) ${pct*3.6}deg, rgba(255,255,255,.08) ${pct*3.6}deg)`;
+    }
+
+    function updateTimer(){
+      if(!state.startTime){
+        $("#timeNum").textContent = "00:00";
+        return;
+      }
+      const sec = Math.floor((Date.now() - state.startTime)/1000);
+      const mm = String(Math.floor(sec/60)).padStart(2,"0");
+      const ss = String(sec%60).padStart(2,"0");
+      $("#timeNum").textContent = mm + ":" + ss;
+    }
+
+    function updateStats(){
+      $("#scoreNum").textContent = state.score;
+      $("#comboNum").textContent = state.combo;
+      $("#rightNum").textContent = state.right;
+      $("#modeText").textContent = state.mode;
+      $("#heroMode").textContent = state.mode;
+      $("#indexText").textContent = `${state.current + 1} / ${state.order.length || questions.length}`;
+      updateRing();
+    }
+
+    function getCurrentQuestion(){
+      return questions[state.order[state.current]];
+    }
+
+    function start(mode){
+      state.started = true;
+      state.current = 0;
+      state.score = 0;
+      state.combo = 0;
+      state.right = 0;
+      state.answered = {};
+      state.mode = mode;
+      state.startTime = Date.now();
+      state.order = [...questions.keys()];
+      if(mode.includes("随机")) state.order = shuffle(state.order);
+
+      clearInterval(state.timer);
+      state.timer = setInterval(updateTimer, 1000);
+
+      $("#resultBox").classList.remove("show");
+      $("#phaseTag").textContent = "答题进行中";
+      renderQuestion();
+      updateStats();
+      updateTimer();
+      toast(mode + " 已启动");
+    }
+
+    function renderQuestion(){
+      const q = getCurrentQuestion();
+      if(!q) return finish();
+
+      $("#qType").textContent =
+        q.type === "essay" ? "思考题挑战" :
+        q.type === "judge" ? "判断题" : "选择题";
+
+      $("#qTheme").textContent = q.theme;
+      $("#qLevel").textContent = q.level;
+      $("#qTitle").textContent = q.title;
+      $("#qDesc").textContent = q.desc || "";
+      $("#indexText").textContent = `${state.current + 1} / ${state.order.length}`;
+
+      const isEssay = q.type === "essay";
+      $("#optionsBox").classList.toggle("hidden", isEssay);
+      $("#essayBox").classList.toggle("hidden", !isEssay);
+      $("#refBtn").classList.toggle("hidden", !isEssay);
+      $("#refBox").classList.remove("show");
+      $("#refBox").textContent = q.ref || "";
+      $("#essayInput").value = "";
+      $("#submitBtn").textContent = isEssay ? "保存思路" : "提交答案";
+
+      if(!isEssay){
+        $("#optionsBox").innerHTML = q.options.map((opt, i) => `
+          <div class="option" data-index="${i}">
+            <span class="mark">${String.fromCharCode(65+i)}</span>
+            <span>${opt}</span>
+          </div>
+        `).join("");
+
+        document.querySelectorAll(".option").forEach(el => {
+          el.onclick = () => {
+            if(state.answered[state.current]) return;
+            document.querySelectorAll(".option").forEach(x => x.classList.remove("checked"));
+            el.classList.add("checked");
+          };
+        });
+      } else {
+        $("#optionsBox").innerHTML = "";
+      }
+
+      updateRing();
+    }
+
+    function submitAnswer(){
+      if(!state.started){
+        toast("请先开始闯关");
+        return;
+      }
+
+      const q = getCurrentQuestion();
+      if(state.answered[state.current]){
+        toast("这题已经提交过啦");
+        return;
+      }
+
+      if(q.type === "essay"){
+        const text = $("#essayInput").value.trim();
+        state.answered[state.current] = { ok:true, text };
+        if(text){
+          state.score += 6;
+          state.combo += 1;
+          state.right += 1;
+          toast("思路已保存，获得 6 分鼓励分");
+        }else{
+          state.score += 3;
+          state.combo = 0;
+          toast("未填写内容，获得 3 分参与分");
+        }
+        updateStats();
+        return;
+      }
+
+      const selectedEl = [...document.querySelectorAll(".option")].find(el => el.classList.contains("checked"));
+      if(!selectedEl){
+        toast("先选一个答案再提交");
+        return;
+      }
+
+      const selected = Number(selectedEl.dataset.index);
+      const ok = q.answer.includes(selected);
+      state.answered[state.current] = { ok, selected };
+
+      document.querySelectorAll(".option").forEach((el, i) => {
+        if(q.answer.includes(i)) el.classList.add("correct");
+        if(i === selected && !q.answer.includes(i)) el.classList.add("wrong");
+      });
+
+      if(ok){
+        state.combo += 1;
+        state.right += 1;
+        const add = 8 + Math.min(4, state.combo - 1);
+        state.score += add;
+        toast(`回答正确！+${add} 分`);
+      }else{
+        state.combo = 0;
+        state.score += 2;
+        toast("回答错误，仍获得 2 分闯关分");
+      }
+
+      $("#qDesc").textContent = (q.desc ? q.desc + " ｜ " : "") + "解析：" + q.explain;
+      updateStats();
+    }
+
+    function nextQuestion(){
+      if(!state.started) return;
+      if(state.current < state.order.length - 1){
+        state.current += 1;
+        renderQuestion();
+      }else{
+        finish();
+      }
+    }
+
+    function prevQuestion(){
+      if(!state.started) return;
+      if(state.current > 0){
+        state.current -= 1;
+        renderQuestion();
+      }
+    }
+
+    function summaryText(score){
+      if(score >= 120) return "你对本章主线已经掌握得非常稳。";
+      if(score >= 95) return "整体不错，再把主观题表达打磨一下会更强。";
+      if(score >= 75) return "框架已经建立，建议再刷一遍随机题巩固。";
+      return "建议先看知识地图，再回头进行二刷。";
+    }
+
+    function finish(){
+      clearInterval(state.timer);
+      $("#phaseTag").textContent = "结算完成";
+      $("#resultBox").classList.add("show");
+
+      const total = state.order.length;
+      const acc = Math.round(state.right / total * 100);
+      $("#finalScore").textContent = state.score + " 分";
+      $("#finalDesc").textContent =
+        `本次共完成 ${total} 题，命中 ${state.right} 题，准确感 ${acc}% 。` + summaryText(state.score);
+
+      const badges = [];
+      if(state.score >= 120) badges.push("文化领航者");
+      if(state.combo >= 5) badges.push("连击火花");
+      if(acc >= 70) badges.push("知识捕手");
+      if((Date.now() - state.startTime)/1000 < 240) badges.push("极速通关");
+      if(badges.length === 0) badges.push("继续发光");
+
+      $("#badgeBox").innerHTML = badges.map(b => `<span class="badge">🏅 ${b}</span>`).join("");
+
+      const reviewData = [
+        ["文化自信", "是否记住“更基础、更广泛、更深厚”的经典表述"],
+        ["意识形态", "是否掌握“国家立心、民族立魂”和根本制度"],
+        ["核心价值观", "是否理解其“凝魂聚气、强基固本”的地位"],
+        ["传统文化", "是否会解释创造性转化、创新性发展"],
+        ["文化事业产业", "是否把握“以人民为中心”的落点"]
+      ];
+      $("#reviewList").innerHTML = reviewData.map((it, i) => `
+        <div class="review-item">
+          <strong>${i+1}. ${it[0]}</strong>
+          <span class="muted">${it[1]}</span>
+        </div>
+      `).join("");
+
+      const best = Number(localStorage.getItem("ch10-best-score") || 0);
+      if(state.score > best){
+        localStorage.setItem("ch10-best-score", String(state.score));
+        toast("新纪录诞生！");
+      }
+      loadBest();
+      makeConfetti();
+    }
+
+    function makeConfetti(){
+      const colors = ["#8b5cf6","#22d3ee","#fb7185","#ffd166","#ffffff"];
+      for(let i=0;i<28;i++){
+        const d = document.createElement("div");
+        d.className = "confetti";
+        d.style.left = Math.random() * 100 + "vw";
+        d.style.background = colors[Math.floor(Math.random() * colors.length)];
+        d.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(d);
+        setTimeout(() => d.remove(), 6200);
+      }
+    }
+
+    document.addEventListener("keydown", e => {
+      if(!state.started) return;
+      const q = getCurrentQuestion();
+
+      if(["1","2","3","4"].includes(e.key) && q.type !== "essay"){
+        const idx = Number(e.key) - 1;
+        const option = document.querySelectorAll(".option")[idx];
+        if(option && !state.answered[state.current]){
+          document.querySelectorAll(".option").forEach(x => x.classList.remove("checked"));
+          option.classList.add("checked");
+        }
+      }
+
+      if(e.key === "ArrowRight") nextQuestion();
+      if(e.key === "ArrowLeft") prevQuestion();
+
+      if(e.key === "Enter" && !e.shiftKey){
+        if(document.activeElement.tagName !== "TEXTAREA"){
+          e.preventDefault();
+          submitAnswer();
+        }
+      }
+
+      if(e.key.toLowerCase() === "r"){
+        start(state.mode.includes("随机") ? "随机抽题模式" : "顺序闯关");
+      }
+    });
+
+    $("#heroCount").textContent = questions.length;
+
+    $("#startBtn").onclick = () => start("顺序闯关");
+    $("#randomBtn").onclick = () => start("随机抽题模式");
+    $("#scrollMapBtn").onclick = () => $("#mapCard").scrollIntoView({behavior:"smooth"});
+    $("#submitBtn").onclick = submitAnswer;
+    $("#nextBtn").onclick = nextQuestion;
+    $("#prevBtn").onclick = prevQuestion;
+    $("#shuffleBtn").onclick = () => start(state.mode.includes("随机") ? "随机抽题模式" : "顺序闯关");
+    $("#restartBtn").onclick = () => start(state.mode.includes("随机") ? "随机抽题模式" : "顺序闯关");
+    $("#refBtn").onclick = () => $("#refBox").classList.toggle("show");
+    $("#againBtn").onclick = () => start("随机抽题模式");
+    $("#reviewBtn").onclick = () => {
+      state.current = 0;
+      renderQuestion();
+      window.scrollTo({top:0, behavior:"smooth"});
+    };
+
+    loadBest();
+    updateRing();
+    updateTimer();
+  </script>
 </body>
 </html>
