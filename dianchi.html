@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>水系锌离子电池知识测验</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(86, 180, 255, 0.18), transparent 30%),
+        radial-gradient(circle at 80% 30%, rgba(0, 255, 163, 0.12), transparent 28%),
+        radial-gradient(circle at 70% 80%, rgba(47, 107, 255, 0.18), transparent 30%),
+        linear-gradient(135deg, #07111f 0%, #0c1f38 45%, #0d2f4d 100%);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: 0 auto;
+      padding: 36px 0 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      padding: 48px 42px;
+      background: linear-gradient(135deg, rgba(14, 31, 55, 0.88), rgba(10, 70, 112, 0.78));
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
+      margin-bottom: 28px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      right: -80px;
+      top: -60px;
+      background: radial-gradient(circle, rgba(61, 203, 255, 0.45), transparent 65%);
+      filter: blur(10px);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(74, 195, 255, 0.16);
+      border: 1px solid rgba(110, 214, 255, 0.25);
+      color: #aeeaff;
+      font-size: 14px;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.1;
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(90deg, #ffffff 0%, #b8ebff 45%, #7cf6d3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 760px;
+      color: rgba(230, 244, 255, 0.9);
+      font-size: 17px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      border-radius: 14px;
+      padding: 14px 22px;
+      font-size: 15px;
+      font-weight: 700;
+      transition: 0.28s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      color: #05213d;
+      background: linear-gradient(135deg, #7ff8de, #85d8ff);
+      box-shadow: 0 10px 26px rgba(123, 234, 255, 0.32);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(123, 234, 255, 0.4);
+    }
+
+    .btn-secondary {
+      color: #e7f8ff;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-2px);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      border-radius: 22px;
+      padding: 24px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
+
+    .stat-card .label {
+      font-size: 14px;
+      color: #9dc7e2;
+      margin-bottom: 10px;
+    }
+
+    .stat-card .value {
+      font-size: 30px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .quiz-section {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .section-title {
+      margin: 18px 0 4px;
+      font-size: 24px;
+      font-weight: 800;
+      color: #d8f7ff;
+      letter-spacing: 0.5px;
+    }
+
+    .question-card {
+      position: relative;
+      padding: 28px 24px 24px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      transition: 0.28s ease;
+    }
+
+    .question-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(136, 226, 255, 0.3);
+      box-shadow: 0 18px 42px rgba(0,0,0,0.24);
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .question-tag {
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      background: rgba(94, 196, 255, 0.14);
+      color: #9fe9ff;
+      border: 1px solid rgba(94, 196, 255, 0.22);
+    }
+
+    .question-text {
+      font-size: 20px;
+      line-height: 1.65;
+      color: #f4fbff;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.05);
+      cursor: pointer;
+      transition: 0.25s ease;
+      user-select: none;
+    }
+
+    .option:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(138, 217, 255, 0.28);
+      transform: translateX(2px);
+    }
+
+    .option input {
+      accent-color: #79e9ff;
+      transform: scale(1.18);
+      cursor: pointer;
+    }
+
+    .option-letter {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(113, 214, 255, 0.22), rgba(123, 255, 214, 0.18));
+      color: #dffbff;
+      font-weight: 800;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .option-text {
+      flex: 1;
+      color: #eef8ff;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .result-panel {
+      margin-top: 28px;
+      border-radius: 28px;
+      padding: 28px;
+      background: linear-gradient(135deg, rgba(8, 31, 52, 0.9), rgba(7, 74, 92, 0.74));
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 18px 48px rgba(0,0,0,0.22);
+      display: none;
+    }
+
+    .result-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #d8fff2;
+    }
+
+    .score-text {
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+
+    .analysis {
+      margin-top: 12px;
+      color: #d3edf8;
+      line-height: 1.9;
+    }
+
+    .action-bar {
+      margin-top: 28px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      text-align: center;
+      color: rgba(220, 242, 255, 0.75);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .correct-highlight {
+      border-color: rgba(94, 255, 176, 0.45) !important;
+      background: rgba(94, 255, 176, 0.12) !important;
+    }
+
+    .wrong-highlight {
+      border-color: rgba(255, 115, 115, 0.45) !important;
+      background: rgba(255, 115, 115, 0.11) !important;
+    }
+
+    .explanation {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      border-left: 4px solid #79e9ff;
+      color: #dbf3ff;
+      line-height: 1.8;
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 34px 22px;
+      }
+
+      .question-card {
+        padding: 22px 16px 20px;
+      }
+
+      .question-text {
+        font-size: 18px;
+      }
+
+      .option {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <div class="hero-badge">ADVANCED ENERGY QUIZ INTERFACE</div>
+      <h1>水系锌离子电池<br>常识选择题测验</h1>
+      <p>
+        水系锌离子电池因其高安全性、低成本、绿色环保以及便于空气中组装等优势，成为新型储能体系中的热门方向。
+      </p>
+      <div class="hero-actions">
+        <a href="#quiz" class="btn btn-primary">开始答题</a>
+        <button class="btn btn-secondary" onclick="scrollToResultInfo()">查看答题说明</button>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="stat-card">
+        <div class="label">题目总数</div>
+        <div class="value">9</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">单选题</div>
+        <div class="value">6</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">多选题</div>
+        <div class="value">3</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">主题关键词</div>
+        <div class="value" style="font-size:20px;">锌负极 / MOF / 锰基材料</div>
+      </div>
+    </section>
+
+    <div id="resultInfo" class="footer-note">
+      答题说明：单选题每题只有 1 个正确答案，多选题可选择多个正确答案。点击“提交答案”后将自动判分并显示正确答案。
+    </div>
+
+    <section class="quiz-section" id="quiz">
+      <h2 class="section-title">单选题</h2>
+
+      <div class="question-card" data-type="single" data-answer="B">
+        <div class="question-header">
+          <span class="question-tag">单选题 01</span>
+        </div>
+        <div class="question-text">1. 水系锌离子电池的核心电解质类型是（ ）</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q1" value="A"><span class="option-letter">A</span><span class="option-text">有机电解液</span></label>
+          <label class="option"><input type="radio" name="q1" value="B"><span class="option-letter">B</span><span class="option-text">水溶液电解液</span></label>
+          <label class="option"><input type="radio" name="q1" value="C"><span class="option-letter">C</span><span class="option-text">固态电解质</span></label>
+          <label class="option"><input type="radio" name="q1" value="D"><span class="option-letter">D</span><span class="option-text">碱性熔融盐</span></label>
+        </div>
+        <div class="explanation">正确答案：B。水系锌离子电池以水溶液电解液为核心，因此具备更高的安全性和更低的成本。</div>
+      </div>
+
+      <div class="question-card" data-type="single" data-answer="D">
+        <div class="question-header">
+          <span class="question-tag">单选题 02</span>
+        </div>
+        <div class="question-text">2. 下列不属于水系锌离子电池优势的是（ ）</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q2" value="A"><span class="option-letter">A</span><span class="option-text">低成本</span></label>
+          <label class="option"><input type="radio" name="q2" value="B"><span class="option-letter">B</span><span class="option-text">高安全</span></label>
+          <label class="option"><input type="radio" name="q2" value="C"><span class="option-letter">C</span><span class="option-text">环境友好</span></label>
+          <label class="option"><input type="radio" name="q2" value="D"><span class="option-letter">D</span><span class="option-text">电解液易燃</span></label>
+        </div>
+        <div class="explanation">正确答案：D。水系锌离子电池通常使用水系电解液，不具备“易燃”这一特点，反而安全性较高。</div>
+      </div>
+
+      <div class="question-card" data-type="single" data-answer="B">
+        <div class="question-header">
+          <span class="question-tag">单选题 03</span>
+        </div>
+        <div class="question-text">3. 锰基电极材料的核心特点是（ ）</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q3" value="A"><span class="option-letter">A</span><span class="option-text">资源稀缺</span></label>
+          <label class="option"><input type="radio" name="q3" value="B"><span class="option-letter">B</span><span class="option-text">资源丰富、成本低</span></label>
+          <label class="option"><input type="radio" name="q3" value="C"><span class="option-letter">C</span><span class="option-text">导电率极高</span></label>
+          <label class="option"><input type="radio" name="q3" value="D"><span class="option-letter">D</span><span class="option-text">无体积变化</span></label>
+        </div>
+        <div class="explanation">正确答案：B。锰基电极材料因资源丰富、价格低廉而广受关注，适合大规模储能应用。</div>
+      </div>
+
+      <div class="question-card" data-type="single" data-answer="B">
+        <div class="question-header">
+          <span class="question-tag">单选题 04</span>
+        </div>
+        <div class="question-text">4. MOF 材料用于电池电极的主要优势是（ ）</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q4" value="A"><span class="option-letter">A</span><span class="option-text">比表面积小</span></label>
+          <label class="option"><input type="radio" name="q4" value="B"><span class="option-letter">B</span><span class="option-text">多孔结构利于离子传输</span></label>
+          <label class="option"><input type="radio" name="q4" value="C"><span class="option-letter">C</span><span class="option-text">结构易坍塌</span></label>
+          <label class="option"><input type="radio" name="q4" value="D"><span class="option-letter">D</span><span class="option-text">制备复杂</span></label>
+        </div>
+        <div class="explanation">正确答案：B。MOF 材料具有多孔结构和丰富活性位点，有利于离子扩散和电化学反应进行。</div>
+      </div>
+
+      <div class="question-card" data-type="single" data-answer="A">
+        <div class="question-header">
+          <span class="question-tag">单选题 05</span>
+        </div>
+        <div class="question-text">5. 水系锌离子电池锌负极最常见的问题是（ ）</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q5" value="A"><span class="option-letter">A</span><span class="option-text">锌枝晶生长</span></label>
+          <label class="option"><input type="radio" name="q5" value="B"><span class="option-letter">B</span><span class="option-text">能量过剩</span></label>
+          <label class="option"><input type="radio" name="q5" value="C"><span class="option-letter">C</span><span class="option-text">成本昂贵</span></label>
+          <label class="option"><input type="radio" name="q5" value="D"><span class="option-letter">D</span><span class="option-text">密度过大</span></label>
+        </div>
+        <div class="explanation">正确答案：A。锌负极面临的典型问题包括枝晶生长、腐蚀与钝化，这些都会影响循环稳定性。</div>
+      </div>
+
+      <div class="question-card" data-type="single" data-answer="B">
+        <div class="question-header">
+          <span class="question-tag">单选题 06</span>
+        </div>
+        <div class="question-text">6. 与锂电池相比，水系锌离子电池组装可在（ ）进行</div>
+        <div class="options">
+          <label class="option"><input type="radio" name="q6" value="A"><span class="option-letter">A</span><span class="option-text">无水无氧环境</span></label>
+          <label class="option"><input type="radio" name="q6" value="B"><span class="option-letter">B</span><span class="option-text">空气中</span></label>
+          <label class="option"><input type="radio" name="q6" value="C"><span class="option-letter">C</span><span class="option-text">真空环境</span></label>
+          <label class="option"><input type="radio" name="q6" value="D"><span class="option-letter">D</span><span class="option-text">低温环境</span></label>
+        </div>
+        <div class="explanation">正确答案：B。水系锌离子电池组装条件相对宽松，通常可直接在空气中进行。</div>
+      </div>
+
+      <h2 class="section-title">多选题</h2>
+
+      <div class="question-card" data-type="multiple" data-answer="ABC">
+        <div class="question-header">
+          <span class="question-tag">多选题 07</span>
+        </div>
+        <div class="question-text">7. 水系锌离子电池的技术挑战有（ ）</div>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q7" value="A"><span class="option-letter">A</span><span class="option-text">锌枝晶</span></label>
+          <label class="option"><input type="checkbox" name="q7" value="B"><span class="option-letter">B</span><span class="option-text">电极腐蚀</span></label>
+          <label class="option"><input type="checkbox" name="q7" value="C"><span class="option-letter">C</span><span class="option-text">锌负极钝化</span></label>
+          <label class="option"><input type="checkbox" name="q7" value="D"><span class="option-letter">D</span><span class="option-text">成本过高</span></label>
+        </div>
+        <div class="explanation">正确答案：ABC。水系锌离子电池主要挑战集中在锌负极界面问题上，而并非成本过高。</div>
+      </div>
+
+      <div class="question-card" data-type="multiple" data-answer="ABC">
+        <div class="question-header">
+          <span class="question-tag">多选题 08</span>
+        </div>
+        <div class="question-text">8. MOF 在储能电池中的作用包括（ ）</div>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q8" value="A"><span class="option-letter">A</span><span class="option-text">提供活性位点</span></label>
+          <label class="option"><input type="checkbox" name="q8" value="B"><span class="option-letter">B</span><span class="option-text">加快离子传输</span></label>
+          <label class="option"><input type="checkbox" name="q8" value="C"><span class="option-letter">C</span><span class="option-text">缓解体积膨胀</span></label>
+          <label class="option"><input type="checkbox" name="q8" value="D"><span class="option-letter">D</span><span class="option-text">降低导电性</span></label>
+        </div>
+        <div class="explanation">正确答案：ABC。MOF 材料通常用于优化传输通道、增加活性位点并改善结构稳定性，而不是“降低导电性”。</div>
+      </div>
+
+      <div class="question-card" data-type="multiple" data-answer="ABCD">
+        <div class="question-header">
+          <span class="question-tag">多选题 09</span>
+        </div>
+        <div class="question-text">9. 锌离子电池比锂离子电池更具优势的点是（ ）</div>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q9" value="A"><span class="option-letter">A</span><span class="option-text">原料储量大</span></label>
+          <label class="option"><input type="checkbox" name="q9" value="B"><span class="option-letter">B</span><span class="option-text">安全性高</span></label>
+          <label class="option"><input type="checkbox" name="q9" value="C"><span class="option-letter">C</span><span class="option-text">绿色环保</span></label>
+          <label class="option"><input type="checkbox" name="q9" value="D"><span class="option-letter">D</span><span class="option-text">组装更简便</span></label>
+        </div>
+        <div class="explanation">正确答案：ABCD。相较于锂离子电池，锌离子电池在资源、安全、环保和工艺简便性方面均有明显优势。</div>
+      </div>
+
+      <div class="action-bar">
+        <button class="btn btn-primary" onclick="submitQuiz()">提交答案</button>
+        <button class="btn btn-secondary" onclick="resetQuiz()">重新作答</button>
+      </div>
+
+      <div class="result-panel" id="resultPanel">
+        <div class="result-title">答题结果</div>
+        <div class="score-text" id="scoreText"></div>
+        <div class="analysis" id="analysisText"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function scrollToResultInfo() {
+      document.getElementById("resultInfo").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function getSelectedAnswer(card, index) {
+      const type = card.dataset.type;
+      const qName = "q" + index;
+
+      if (type === "single") {
+        const checked = document.querySelector('input[name="' + qName + '"]:checked');
+        return checked ? checked.value : "";
+      } else {
+        const checked = document.querySelectorAll('input[name="' + qName + '"]:checked');
+        const values = Array.from(checked).map(item => item.value).sort();
+        return values.join("");
+      }
+    }
+
+    function clearHighlights() {
+      document.querySelectorAll(".option").forEach(option => {
+        option.classList.remove("correct-highlight", "wrong-highlight");
+      });
+    }
+
+    function highlightAnswers(card, index, userAnswer, correctAnswer) {
+      const qName = "q" + index;
+      const inputs = document.querySelectorAll('input[name="' + qName + '"]');
+
+      inputs.forEach(input => {
+        const wrapper = input.closest(".option");
+        const val = input.value;
+
+        if (correctAnswer.includes(val)) {
+          wrapper.classList.add("correct-highlight");
+        }
+
+        if (input.checked && !correctAnswer.includes(val)) {
+          wrapper.classList.add("wrong-highlight");
+        }
+      });
+
+      const explanation = card.querySelector(".explanation");
+      if (explanation) explanation.style.display = "block";
+    }
+
+    function submitQuiz() {
+      const cards = document.querySelectorAll(".question-card");
+      let score = 0;
+      let answered = 0;
+
+      clearHighlights();
+
+      cards.forEach((card, idx) => {
+        const index = idx + 1;
+        const correctAnswer = card.dataset.answer;
+        const userAnswer = getSelectedAnswer(card, index);
+
+        if (userAnswer) answered++;
+
+        if (userAnswer === correctAnswer) {
+          score++;
+        }
+
+        highlightAnswers(card, index, userAnswer, correctAnswer);
+      });
+
+      const total = cards.length;
+      const percentage = Math.round((score / total) * 100);
+      let level = "";
+
+      if (percentage === 100) {
+        level = "优秀：你对水系锌离子电池知识掌握得非常扎实。";
+      } else if (percentage >= 80) {
+        level = "良好：你已经具备较好的基础认知。";
+      } else if (percentage >= 60) {
+        level = "及格：基础知识已掌握，建议继续巩固锌负极与 MOF 相关内容。";
+      } else {
+        level = "提升空间较大：建议重点复习水系电解液、锌负极问题和 MOF 材料优势。";
+      }
+
+      document.getElementById("resultPanel").style.display = "block";
+      document.getElementById("scoreText").innerHTML =
+        "你的得分：<strong>" + score + " / " + total + "</strong>（已作答 " + answered + " 题，正确率 " + percentage + "%）";
+      document.getElementById("analysisText").innerHTML =
+        level + "<br><br>知识提示：水系锌离子电池的核心优势在于安全、低成本、环保和组装简便；其关键挑战集中在锌负极枝晶、腐蚀和钝化等问题。";
+
+      document.getElementById("resultPanel").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function resetQuiz() {
+      document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
+        input.checked = false;
+      });
+
+      clearHighlights();
+
+      document.querySelectorAll(".explanation").forEach(item => {
+        item.style.display = "none";
+      });
+
+      document.getElementById("resultPanel").style.display = "none";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
